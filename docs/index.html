@@ -27,6 +27,10 @@ svg text { font-size: 12px; fill: var(--fg); } .axis text { fill: var(--muted); 
 table { border-collapse: collapse; width: 100%; font-size: 13px; } th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
 td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
 .tip { position: fixed; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 280px; }
+.how .howgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+.how p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.how .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin: 0 4px 0 2px; }
+a { color: var(--blue); }
 </style>
 </head>
 <body>
@@ -34,8 +38,17 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
   <div>
     <span class="badge">Synthetic data — every market and number is simulated</span>
     <h1 style="margin-top:8px">Supply–Demand Map</h1>
-    <p class="sub">A two-sided shift marketplace: facilities post shifts, workers book them. Is a market's low fill a problem with the shifts, or with the market?</p>
+    <p class="sub">A two-sided shift marketplace: facilities post shifts, workers book them. Is a market's low fill a problem with the shifts, or with the market? And which team should act?</p>
+    <p class="sub" style="margin-top:6px"><a href="https://github.com/josephfanpm/Marketplace-Demand-Supply#readme">README</a> · <a href="https://github.com/josephfanpm/Marketplace-Demand-Supply/blob/main/docs/CASE_STUDY.md">Case study</a> · <a href="https://github.com/josephfanpm/Marketplace-Demand-Supply/blob/main/docs/PRD.md">PRD</a></p>
   </div>
+  <section class="card how">
+    <h2>How to read this</h2>
+    <div class="howgrid">
+      <div><b>The question</b><p>Fill rate is falling while demand grows. The default fix is "recruit more workers", but posted hours are lost for many reasons, and only some are a shortage.</p></div>
+      <div><b>The idea</b><p>Predict how well each market's shifts <i>should</i> fill from their traits alone (pay, posting time, approval, weekends, nights). Compare that with actual fill. Below expected means a market problem; low expected means a shift problem.</p></div>
+      <div><b>Who acts</b><p><span class="dot" style="background:var(--red)"></span>Recruiting: markets below expected. <span class="dot" style="background:var(--purple)"></span>Client success: hard-to-fill shifts. <span class="dot" style="background:var(--amber)"></span>Operations: callouts. <span class="dot" style="background:var(--blue)"></span>Account managers: spare capacity, so close leads.</p></div>
+    </div>
+  </section>
   <div class="tiles" id="tiles"></div>
   <section class="card">
     <h2>Fill rate vs expected fill</h2>
@@ -147,7 +160,7 @@ d3.json('data.json').then((d) => {
       .on('mouseleave', hideTip);
     svg.append('g').selectAll('text').data(states.filter((s) => agg.has(s.id) && agg.get(s.id).bal === 'Short of workers' && s.c)).join('text')
       .attr('x', (s) => s.c[0]).attr('y', (s) => s.c[1]).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('fill', '#fff').attr('font-weight', 600).attr('font-size', 13).attr('pointer-events', 'none').text((s) => fmt(agg.get(s.id).short));
+      .style('fill', '#fff').attr('font-weight', 600).attr('font-size', 13).attr('pointer-events', 'none').text((s) => fmt(agg.get(s.id).short));
     document.getElementById('mlegend').innerHTML = Object.entries(BAL).filter(([b]) => b !== 'Too little data').map(([b, c]) => `<span><i style="background:${c}"></i>${b}</span>`).join('');
   });
 
