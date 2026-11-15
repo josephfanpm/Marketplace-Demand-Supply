@@ -4,7 +4,7 @@ A case study in building an internal decision tool for a two-sided marketplace. 
 
 > **Everything in this repo is synthetic.** The markets, names and numbers are simulated by `generate.py`. The method and the product thinking come from a tool I built for a healthcare staffing marketplace. The data, the SQL and the company's results are not here.
 
-**[Live demo (synthetic data)](docs/index.html)** · [`generate.py`](generate.py) simulates the marketplace and fits the model
+**[Live demo (synthetic data)](https://josephfanpm.github.io/eshyft-demand-supply/)** · [`generate.py`](generate.py) simulates the marketplace and fits the model
 
 ---
 
