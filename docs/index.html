@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supply–Demand Map (synthetic demo)</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<style>
+:root { --fg:#1d1d1f; --muted:#6b6b70; --bg:#fafaf8; --panel:#fff; --line:#e6e6e3; --blue:#2f6fb5; --red:#c8453b; --green:#2e9e6a; --grey:#a8a8a8; --purple:#8e5bb5; --amber:#c98a1b; }
+@media (prefers-color-scheme: dark) { :root { --fg:#ececec; --muted:#a0a0a6; --bg:#151517; --panel:#1e1e21; --line:#2e2e33; } }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px 16px 64px; font: 15px/1.5 system-ui, -apple-system, Segoe UI, sans-serif; color: var(--fg); background: var(--bg); }
+main { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1 { margin: 0; font-size: 26px; } h2 { margin: 0 0 4px; font-size: 17px; }
+.sub { color: var(--muted); font-size: 13px; margin: 0; }
+.badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#fff3d6; color:#7a5200; font-size:12px; font-weight:600; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; min-width: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.tile .v { font-size: 26px; font-variant-numeric: tabular-nums; } .tile .l { color: var(--muted); font-size: 12px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-size: 12px; fill: var(--fg); } .axis text { fill: var(--muted); font-size: 11px; } .axis path, .axis line { stroke: var(--line); }
+.halo { paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:12px; color:var(--muted); margin-top:8px; }
+.legend i { display:inline-block; width:12px; height:12px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; } th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.tip { position: fixed; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 280px; }
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <span class="badge">Synthetic data — every market and number is simulated</span>
+    <h1 style="margin-top:8px">Supply–Demand Map</h1>
+    <p class="sub">A two-sided shift marketplace: facilities post shifts, workers book them. Is a market's low fill a problem with the shifts, or with the market?</p>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <section class="card">
+    <h2>Fill rate vs expected fill</h2>
+    <p class="sub">Expected fill comes from shift traits only (pay vs local, posting lead time, approval, weekend, night, slots). Expected flat while actual falls → the market lost capacity, not the shifts.</p>
+    <div id="trend"></div>
+  </section>
+  <section class="card">
+    <h2>Where posted hours go</h2>
+    <p class="sub">Band width is hours per week. Red is lost before or after a worker is booked; grey is not a real miss.</p>
+    <div class="scroll"><div id="sankey" style="min-width:760px"></div></div>
+  </section>
+  <div class="grid">
+    <section class="card">
+      <h2>Markets: actual vs expected fill</h2>
+      <p class="sub">Below the line: the market can't fill shifts that should fill. Left: the shifts themselves are hard to fill.</p>
+      <div id="scatter"></div><div class="legend" id="slegend"></div>
+    </section>
+    <section class="card">
+      <h2>What to do, by market</h2>
+      <div class="scroll"><table id="tbl"></table></div>
+    </section>
+  </div>
+</main>
+<div class="tip" id="tip" hidden></div>
+<script>
+const COLORS = { 'Recruit workers': 'var(--red)', 'Improve reliability': 'var(--amber)', 'Fix shifts': 'var(--purple)', 'Healthy': 'var(--green)', 'Spare capacity': 'var(--blue)', 'Too little data': 'var(--grey)' };
+const fmt = d3.format(',');
+const tip = document.getElementById('tip');
+const showTip = (e, html) => { tip.innerHTML = html; tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - 300) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; };
+const hideTip = () => { tip.hidden = true; };
+
+d3.json('data.json').then((d) => {
+  const recent = d.weekly.slice(-5, -1), early = d.weekly.slice(1, 5), avg = (a, k) => d3.mean(a, (x) => x[k]);
+  const counts = d3.rollup(d.markets, (v) => v.length, (m) => m.status);
+  const short = d3.sum(d.markets, (m) => m.workers_short);
+  const tiles = [
+    [avg(recent, 'fill_pct').toFixed(1) + '%', `Fill rate (was ${avg(early, 'fill_pct').toFixed(1)}%)`],
+    [avg(recent, 'expected_pct').toFixed(1) + '%', `Expected fill (was ${avg(early, 'expected_pct').toFixed(1)}%)`],
+    [fmt(short), `Workers short in ${counts.get('Recruit workers') || 0} markets`],
+    [String(counts.get('Spare capacity') || 0), 'Markets with spare capacity']];
+  document.getElementById('tiles').innerHTML = tiles.map(([v, l]) => `<div class="card tile"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
+
+  // trend
+  { const W = 1080, H = 240, m = { t: 10, r: 16, b: 26, l: 40 };
+    const svg = d3.select('#trend').append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Weekly fill rate and expected fill');
+    const rows = d.weekly.slice(0, -1);
+    const x = d3.scaleLinear().domain(d3.extent(rows, (r) => r.week)).range([m.l, W - m.r]);
+    const lo = d3.min(rows, (r) => Math.min(r.fill_pct, r.expected_pct)) - 4, hi = d3.max(rows, (r) => Math.max(r.fill_pct, r.expected_pct)) + 3;
+    const y = d3.scaleLinear().domain([lo, hi]).nice().range([H - m.b, m.t]);
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => v + '%'));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6).tickFormat((v) => v === 0 ? 'now' : v + 'w'));
+    [['expected_pct', 'var(--grey)', '5 4', 'Expected fill'], ['fill_pct', 'var(--blue)', null, 'Fill rate']].forEach(([k, c, dash, label]) => {
+      svg.append('path').attr('d', d3.line().x((r) => x(r.week)).y((r) => y(r[k]))(rows)).attr('fill', 'none').attr('stroke', c).attr('stroke-width', 2).attr('stroke-dasharray', dash);
+      const first = rows[0];
+      svg.append('text').attr('class', 'halo').attr('x', x(first.week) + 4).attr('y', y(first[k]) + (k === 'fill_pct' ? -8 : 16)).attr('text-anchor', 'start').text(label);
+    });
+  }
+
+  // sankey (posted -> booked -> worked, losses peel up before booking and down after)
+  { const f = d.flow, W = 1080, k = 170 / f.posted, NW = 10;
+    const before = [['Nobody applied', f.open, 'var(--red)'], ['Deleted <24h', f.deleted_late, 'var(--red)'], ['Slots removed', f.slot_removed, 'var(--red)'], ['Applied, not booked', f.applied_not_booked, 'var(--red)'], ['Deleted 24h+ ahead', f.deleted_early, 'var(--grey)']];
+    const after = [['Called out', f.called_out, 'var(--red)'], ['Cancelled by facility', f.cancelled, 'var(--red)'], ['No-shows', f.no_show, 'var(--red)'], ['Worked shorter', f.short, 'var(--grey)']];
+    const L = d3.sum(before, (b) => b[1]), B = f.posted - L, Wk = B - d3.sum(after, (a) => a[1]);
+    const X = [140, 480, 800], nodes = [], links = [];
+    const P = { name: 'Posted', v: f.posted, x: X[0], y0: -f.posted * k, y1: 0, c: 'var(--blue)' };
+    const Bk = { name: 'Booked', v: B, x: X[1], y0: -B * k, y1: 0, c: 'var(--blue)' };
+    const Wn = { name: 'Worked', v: Wk, x: X[2], y0: Bk.y0, y1: Bk.y0 + Wk * k, c: 'var(--green)' };
+    nodes.push(P, Bk, Wn);
+    let bottom = Bk.y0 - 16, sy = P.y0; const up = [];
+    [...before].reverse().forEach(([n, v, c]) => { const h = Math.max(v * k, 1.5); const nd = { name: n, v, c, x: X[1], y1: bottom, y0: bottom - h }; up.push(nd); bottom = nd.y0 - Math.max(8, 30 - h); });
+    up.reverse().forEach((nd) => { nodes.push(nd); links.push({ s: P, sy, t: nd, ty: nd.y0, v: nd.v, c: nd.c }); sy += nd.v * k; });
+    links.push({ s: P, sy, t: Bk, ty: Bk.y0, v: B, c: 'var(--blue)' });
+    let syB = Bk.y0; links.push({ s: Bk, sy: syB, t: Wn, ty: Wn.y0, v: Wk, c: 'var(--green)' }); syB += Wk * k;
+    let top = 22; after.forEach(([n, v, c]) => { const h = Math.max(v * k, 1.5); const nd = { name: n, v, c, x: X[2], y0: top, y1: top + h }; nodes.push(nd); links.push({ s: Bk, sy: syB, t: nd, ty: nd.y0, v, c }); syB += v * k; top = nd.y1 + Math.max(10, 30 - h); });
+    const yMin = d3.min(nodes, (n) => n.y0) - 20, yMax = d3.max(nodes, (n) => n.y1) + 20;
+    const svg = d3.select('#sankey').append('svg').attr('viewBox', `0 ${yMin} ${W} ${yMax - yMin}`).attr('role', 'img').attr('aria-label', `Posted ${fmt(f.posted)}, booked ${fmt(B)}, worked ${fmt(Wk)} hours per week`);
+    const rib = (l) => { const x0 = l.s.x + NW, x1 = l.t.x, xm = (x0 + x1) / 2; return `M${x0},${l.sy}C${xm},${l.sy} ${xm},${l.ty} ${x1},${l.ty}L${x1},${l.ty + l.v * k}C${xm},${l.ty + l.v * k} ${xm},${l.sy + l.v * k} ${x0},${l.sy + l.v * k}Z`; };
+    svg.append('g').selectAll('path').data(links).join('path').attr('d', rib).attr('fill', (l) => l.c).attr('fill-opacity', 0.3)
+      .on('mousemove', (e, l) => showTip(e, `<b>${l.s.name} → ${l.t.name}</b><br>${fmt(l.v)} hrs/wk (${Math.round(100 * l.v / f.posted)}% of posted)`)).on('mouseleave', hideTip);
+    const g = svg.append('g').selectAll('g').data(nodes).join('g');
+    g.append('rect').attr('x', (n) => n.x).attr('y', (n) => n.y0).attr('width', NW).attr('height', (n) => Math.max(n.y1 - n.y0, 1.5)).attr('rx', 2).attr('fill', (n) => n.c);
+    g.append('text').attr('class', 'halo').attr('x', (n) => n === P ? n.x - 8 : n.x + NW + 8).attr('text-anchor', (n) => n === P ? 'end' : 'start')
+      .attr('y', (n) => (n.y0 + n.y1) / 2).attr('dominant-baseline', 'middle').text((n) => `${n.name}  ${fmt(n.v)}`);
+  }
+
+  // scatter: expected (x) vs actual (y)
+  { const W = 520, H = 360, m = { t: 10, r: 14, b: 36, l: 44 };
+    const rows = d.markets.filter((r) => r.status !== 'Too little data');
+    const svg = d3.select('#scatter').append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Markets by expected and actual fill');
+    const ext = d3.extent(rows.flatMap((r) => [r.fill_pct, r.expected_pct])); const dom = [Math.floor(ext[0] - 3), Math.ceil(ext[1] + 3)];
+    const x = d3.scaleLinear().domain(dom).range([m.l, W - m.r]), y = d3.scaleLinear().domain(dom).range([H - m.b, m.t]);
+    const r = d3.scaleSqrt().domain([0, d3.max(rows, (q) => q.posted_hrs_wk)]).range([2, 16]);
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(5).tickFormat((v) => v + '%'));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => v + '%'));
+    svg.append('line').attr('x1', x(dom[0])).attr('y1', y(dom[0])).attr('x2', x(dom[1])).attr('y2', y(dom[1])).attr('stroke', 'var(--grey)').attr('stroke-dasharray', '4 4');
+    svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').attr('fill', 'var(--muted)').text('Expected fill →');
+    svg.append('text').attr('x', m.l + 4).attr('y', m.t + 10).attr('fill', 'var(--muted)').text('↑ Actual fill');
+    svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (q) => x(q.expected_pct)).attr('cy', (q) => y(q.fill_pct)).attr('r', (q) => r(q.posted_hrs_wk))
+      .attr('fill', (q) => COLORS[q.status]).attr('fill-opacity', 0.75).attr('stroke', 'var(--panel)').attr('stroke-width', 1.5)
+      .on('mousemove', (e, q) => showTip(e, `<b>${q.market}</b> — ${q.status}<br>Fill ${q.fill_pct}% vs ${q.expected_pct}% expected (${q.vs_expected_pts > 0 ? '+' : ''}${q.vs_expected_pts} pts)<br>${fmt(q.posted_hrs_wk)} posted hrs/wk`)).on('mouseleave', hideTip);
+    document.getElementById('slegend').innerHTML = Object.entries(COLORS).filter(([s]) => s !== 'Too little data').map(([s, c]) => `<span><i style="background:${c}"></i>${s}</span>`).join('');
+  }
+
+  // table
+  { const order = ['Recruit workers', 'Improve reliability', 'Fix shifts', 'Spare capacity', 'Healthy'];
+    const rows = d.markets.filter((r) => r.status !== 'Healthy' && r.status !== 'Too little data').sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status) || a.vs_expected_pts - b.vs_expected_pts);
+    const why = (r) => r.status === 'Fix shifts' ? `${r.late_post_pct}% posted late · ${r.approval_pct}% need approval · ${r.low_pay_pct}% low pay` : r.status === 'Recruit workers' ? `${r.workers_short} workers short` : '';
+    document.getElementById('tbl').innerHTML = '<thead><tr><th>Market</th><th>Status</th><th class="n">Fill</th><th class="n">Expected</th><th>Detail</th></tr></thead><tbody>' +
+      rows.map((r) => `<tr><td>${r.market}</td><td><span style="color:${COLORS[r.status]}">●</span> ${r.status}</td><td class="n">${r.fill_pct}%</td><td class="n">${r.expected_pct}%</td><td>${why(r)}</td></tr>`).join('') + '</tbody>';
+  }
+});
+</script>
+</body>
+</html>
