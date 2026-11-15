@@ -47,6 +47,11 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
     <p class="sub">Band width is hours per week. Red is lost before or after a worker is booked; grey is not a real miss.</p>
     <div class="scroll"><div id="sankey" style="min-width:760px"></div></div>
   </section>
+  <section class="card">
+    <h2>Where workers are short</h2>
+    <p class="sub">By state, last 8 weeks. Numbers are workers short in markets filling well below what their shifts should. Hover a state for its markets.</p>
+    <div id="map"></div><div class="legend" id="mlegend"></div>
+  </section>
   <div class="grid">
     <section class="card">
       <h2>Markets: actual vs expected fill</h2>
@@ -121,6 +126,31 @@ d3.json('data.json').then((d) => {
       .attr('y', (n) => (n.y0 + n.y1) / 2).attr('dominant-baseline', 'middle').text((n) => `${n.name}  ${fmt(n.v)}`);
   }
 
+
+  // state map
+  d3.json('us-states.json').then((states) => {
+    const BAL = { 'Short of workers': 'var(--red)', 'Enough workers': 'var(--grey)', 'Spare capacity': 'var(--blue)', 'Too little data': 'var(--line)' };
+    const by = d3.group(d.markets, (m) => m.state);
+    const agg = new Map([...by].map(([st, ms]) => {
+      const posted = d3.sum(ms, (m) => m.posted_hrs_wk), short = d3.sum(ms, (m) => m.workers_short);
+      const spare = d3.sum(ms.filter((m) => m.status === 'Spare capacity'), (m) => m.posted_hrs_wk);
+      const bal = posted < 40 ? 'Too little data' : short >= 5 ? 'Short of workers' : spare >= 0.5 * posted ? 'Spare capacity' : 'Enough workers';
+      return [st, { ms, posted, short, bal, fill: d3.sum(ms, (m) => m.fill_pct * m.posted_hrs_wk) / posted, exp: d3.sum(ms, (m) => m.expected_pct * m.posted_hrs_wk) / posted }];
+    }));
+    const svg = d3.select('#map').append('svg').attr('viewBox', '0 0 975 615').attr('role', 'img')
+      .attr('aria-label', 'US states colored by worker supply: ' + Object.keys(BAL).slice(0, 3).map((b) => `${b}: ${[...agg].filter(([, a]) => a.bal === b).map(([s]) => s).join(', ') || 'none'}`).join('. '));
+    svg.append('g').selectAll('path').data(states).join('path').attr('d', (s) => s.d)
+      .attr('fill', (s) => (agg.has(s.id) ? BAL[agg.get(s.id).bal] : 'var(--panel)')).attr('stroke', 'var(--panel)').attr('stroke-width', 1)
+      .on('mousemove', (e, s) => { const a = agg.get(s.id); if (!a) return hideTip();
+        showTip(e, `<b>${s.name}</b> — ${a.bal}<br>Fill ${a.fill.toFixed(1)}% vs ${a.exp.toFixed(1)}% expected<br>${fmt(a.posted)} posted hrs/wk · ${fmt(a.short)} workers short<br>` +
+          a.ms.map((m) => `<span style="color:${COLORS[m.status]}">●</span> ${m.market}: ${m.status}`).join('<br>')); })
+      .on('mouseleave', hideTip);
+    svg.append('g').selectAll('text').data(states.filter((s) => agg.has(s.id) && agg.get(s.id).bal === 'Short of workers' && s.c)).join('text')
+      .attr('x', (s) => s.c[0]).attr('y', (s) => s.c[1]).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('fill', '#fff').attr('font-weight', 600).attr('font-size', 13).attr('pointer-events', 'none').text((s) => fmt(agg.get(s.id).short));
+    document.getElementById('mlegend').innerHTML = Object.entries(BAL).filter(([b]) => b !== 'Too little data').map(([b, c]) => `<span><i style="background:${c}"></i>${b}</span>`).join('');
+  });
+
   // scatter: expected (x) vs actual (y)
   { const W = 520, H = 360, m = { t: 10, r: 14, b: 36, l: 44 };
     const rows = d.markets.filter((r) => r.status !== 'Too little data');
@@ -142,7 +172,7 @@ d3.json('data.json').then((d) => {
   // table
   { const order = ['Recruit workers', 'Improve reliability', 'Fix shifts', 'Spare capacity', 'Healthy'];
     const rows = d.markets.filter((r) => r.status !== 'Healthy' && r.status !== 'Too little data').sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status) || a.vs_expected_pts - b.vs_expected_pts);
-    const why = (r) => r.status === 'Fix shifts' ? `${r.late_post_pct}% posted late · ${r.approval_pct}% need approval · ${r.low_pay_pct}% low pay` : r.status === 'Recruit workers' ? `${r.workers_short} workers short` : '';
+    const why = (r) => r.status === 'Fix shifts' ? `${r.late_post_pct}% posted late · ${r.approval_pct}% need approval · ${r.low_pay_pct}% low pay` : r.status === 'Recruit workers' ? `${r.workers_short} workers short` : r.status === 'Spare capacity' ? 'Account managers should close leads in this market' : '';
     document.getElementById('tbl').innerHTML = '<thead><tr><th>Market</th><th>Status</th><th class="n">Fill</th><th class="n">Expected</th><th>Detail</th></tr></thead><tbody>' +
       rows.map((r) => `<tr><td>${r.market}</td><td><span style="color:${COLORS[r.status]}">●</span> ${r.status}</td><td class="n">${r.fill_pct}%</td><td class="n">${r.expected_pct}%</td><td>${why(r)}</td></tr>`).join('') + '</tbody>';
   }

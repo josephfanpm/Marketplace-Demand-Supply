@@ -39,7 +39,7 @@ flowchart LR
   D --> E
   E -->|well below| F[Recruit workers or<br/>improve reliability]
   E -->|about equal, but<br/>expected is low| G[Fix the shifts]
-  E -->|well above| H[Spare capacity:<br/>sales can add demand]
+  E -->|well above| H[Spare capacity:<br/>account managers close leads here]
 ```
 
 The model predicts how well a shift should fill from its traits alone. It deliberately leaves out how many workers are nearby. That turns it into a benchmark:
@@ -101,7 +101,7 @@ python generate.py                 # writes docs/data.json from a fresh simulati
 python -m http.server -d docs 8000 # open http://localhost:8000
 ```
 
-`generate.py` simulates about 670k posted slots across 32 fictional markets over 26 weeks. Each market has a hidden supply strength, and a third of markets lose supply over time. It then fits the shift-trait model on the latest 8 weeks, labels each market, and writes the demo data. The fitted coefficients sit next to the true ones in `docs/data.json`. They differ a little, a reminder that the model describes typical fill and isn't a causal estimate.
+`generate.py` simulates about 1.5 million posted slots across 64 fictional markets in all 48 continental states and DC over 26 weeks. Each market has a hidden supply strength, and a third of markets lose supply over time. It then fits the shift-trait model on the latest 8 weeks, labels each market, and writes the demo data. The fitted coefficients sit next to the true ones in `docs/data.json`. They differ a little, a reminder that the model describes typical fill and isn't a causal estimate.
 
 ## Limitations
 
