@@ -38,7 +38,7 @@ TRUE = {"intercept": 0.9, "pay_low": -0.9, "pay_high": 0.15, "late_post": -0.8, 
 def simulate():
     markets = []
     for i, name in enumerate(NAMES):
-        size = float(rng.lognormal(6.3, 0.7))                       # weekly posted hours scale
+        size = float(rng.lognormal(6.3 + np.log(10), 0.7))         # weekly posted hours scale
         supply = float(rng.normal(0, 0.55))                          # market supply strength (hidden)
         decline = float(rng.choice([0.0, -0.02, -0.045], p=[0.5, 0.2, 0.3]))  # some markets lose supply over time
         callout = float(np.clip(rng.normal(0.16, 0.07), 0.03, 0.4))  # share of booked slots called out

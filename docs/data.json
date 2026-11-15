@@ -1,127 +1,127 @@
 {
  "note": "Synthetic data. Every market, number and name is simulated.",
- "national_fill_pct": 36.0,
- "national_expected_pct": 36.0,
+ "national_fill_pct": 36.1,
+ "national_expected_pct": 36.1,
  "weekly": [
   {
    "week": -25,
-   "fill_pct": 42.5,
+   "fill_pct": 41.4,
    "expected_pct": 36.1
   },
   {
    "week": -24,
-   "fill_pct": 42.1,
-   "expected_pct": 36.1
+   "fill_pct": 40.8,
+   "expected_pct": 36.2
   },
   {
    "week": -23,
-   "fill_pct": 40.2,
-   "expected_pct": 36.0
+   "fill_pct": 41.9,
+   "expected_pct": 36.2
   },
   {
    "week": -22,
-   "fill_pct": 41.2,
-   "expected_pct": 36.0
+   "fill_pct": 40.4,
+   "expected_pct": 36.1
   },
   {
    "week": -21,
-   "fill_pct": 40.3,
-   "expected_pct": 36.4
+   "fill_pct": 41.0,
+   "expected_pct": 36.1
   },
   {
    "week": -20,
    "fill_pct": 40.4,
-   "expected_pct": 36.3
+   "expected_pct": 36.1
   },
   {
    "week": -19,
-   "fill_pct": 40.7,
-   "expected_pct": 36.0
+   "fill_pct": 40.2,
+   "expected_pct": 36.2
   },
   {
    "week": -18,
-   "fill_pct": 38.3,
-   "expected_pct": 35.9
+   "fill_pct": 39.5,
+   "expected_pct": 36.1
   },
   {
    "week": -17,
-   "fill_pct": 39.2,
-   "expected_pct": 36.3
+   "fill_pct": 39.3,
+   "expected_pct": 36.1
   },
   {
    "week": -16,
-   "fill_pct": 39.2,
-   "expected_pct": 35.9
+   "fill_pct": 39.5,
+   "expected_pct": 36.1
   },
   {
    "week": -15,
-   "fill_pct": 37.2,
-   "expected_pct": 35.9
+   "fill_pct": 39.5,
+   "expected_pct": 36.1
   },
   {
    "week": -14,
-   "fill_pct": 38.2,
-   "expected_pct": 35.7
+   "fill_pct": 39.0,
+   "expected_pct": 36.1
   },
   {
    "week": -13,
-   "fill_pct": 37.5,
-   "expected_pct": 35.8
+   "fill_pct": 38.8,
+   "expected_pct": 36.2
   },
   {
    "week": -12,
-   "fill_pct": 39.0,
-   "expected_pct": 36.0
+   "fill_pct": 37.8,
+   "expected_pct": 36.1
   },
   {
    "week": -11,
-   "fill_pct": 37.6,
-   "expected_pct": 36.5
+   "fill_pct": 38.0,
+   "expected_pct": 36.1
   },
   {
    "week": -10,
-   "fill_pct": 37.2,
-   "expected_pct": 36.0
+   "fill_pct": 37.9,
+   "expected_pct": 36.2
   },
   {
    "week": -9,
-   "fill_pct": 37.3,
-   "expected_pct": 36.3
+   "fill_pct": 37.7,
+   "expected_pct": 36.1
   },
   {
    "week": -8,
-   "fill_pct": 35.3,
+   "fill_pct": 37.3,
    "expected_pct": 36.1
   },
   {
    "week": -7,
-   "fill_pct": 35.6,
-   "expected_pct": 35.7
+   "fill_pct": 37.1,
+   "expected_pct": 36.1
   },
   {
    "week": -6,
-   "fill_pct": 36.3,
-   "expected_pct": 35.9
+   "fill_pct": 36.8,
+   "expected_pct": 36.2
   },
   {
    "week": -5,
-   "fill_pct": 36.9,
-   "expected_pct": 35.9
+   "fill_pct": 36.4,
+   "expected_pct": 36.1
   },
   {
    "week": -4,
-   "fill_pct": 36.0,
-   "expected_pct": 36.0
+   "fill_pct": 35.9,
+   "expected_pct": 36.2
   },
   {
    "week": -3,
-   "fill_pct": 36.8,
-   "expected_pct": 36.3
+   "fill_pct": 36.4,
+   "expected_pct": 36.2
   },
   {
    "week": -2,
-   "fill_pct": 36.1,
-   "expected_pct": 36.0
+   "fill_pct": 36.2,
+   "expected_pct": 36.1
   },
   {
    "week": -1,
@@ -130,293 +130,305 @@
   },
   {
    "week": 0,
-   "fill_pct": 34.9,
-   "expected_pct": 36.2
+   "fill_pct": 34.7,
+   "expected_pct": 36.1
   }
  ],
  "markets": [
   {
-   "market": "Newcastle",
-   "posted_hrs_wk": 182,
-   "fill_pct": 14.1,
-   "expected_pct": 34.4,
-   "vs_expected_pts": -20.3,
-   "status": "Recruit workers",
-   "workers_short": 3,
-   "late_post_pct": 53,
-   "approval_pct": 4,
-   "low_pay_pct": 9
-  },
-  {
    "market": "Juniper Bay",
-   "posted_hrs_wk": 1032,
-   "fill_pct": 18.4,
-   "expected_pct": 35.7,
-   "vs_expected_pts": -17.3,
+   "posted_hrs_wk": 9577,
+   "fill_pct": 17.1,
+   "expected_pct": 35.6,
+   "vs_expected_pts": -18.6,
    "status": "Recruit workers",
-   "workers_short": 13,
-   "late_post_pct": 32,
-   "approval_pct": 9,
-   "low_pay_pct": 16
+   "workers_short": 127,
+   "late_post_pct": 33,
+   "approval_pct": 10,
+   "low_pay_pct": 14
   },
   {
-   "market": "Bellhaven",
-   "posted_hrs_wk": 422,
-   "fill_pct": 19.3,
-   "expected_pct": 34.2,
-   "vs_expected_pts": -14.9,
+   "market": "Newcastle",
+   "posted_hrs_wk": 1853,
+   "fill_pct": 17.6,
+   "expected_pct": 34.8,
+   "vs_expected_pts": -17.2,
    "status": "Recruit workers",
-   "workers_short": 4,
-   "late_post_pct": 30,
+   "workers_short": 23,
+   "late_post_pct": 53,
    "approval_pct": 5,
-   "low_pay_pct": 31
+   "low_pay_pct": 7
+  },
+  {
+   "market": "Thornbury",
+   "posted_hrs_wk": 13404,
+   "fill_pct": 17.4,
+   "expected_pct": 27.9,
+   "vs_expected_pts": -10.5,
+   "status": "Recruit workers",
+   "workers_short": 101,
+   "late_post_pct": 10,
+   "approval_pct": 61,
+   "low_pay_pct": 38
+  },
+  {
+   "market": "Eastport",
+   "posted_hrs_wk": 3424,
+   "fill_pct": 26.2,
+   "expected_pct": 36.5,
+   "vs_expected_pts": -10.3,
+   "status": "Recruit workers",
+   "workers_short": 25,
+   "late_post_pct": 25,
+   "approval_pct": 5,
+   "low_pay_pct": 21
+  },
+  {
+   "market": "Foxborough",
+   "posted_hrs_wk": 6358,
+   "fill_pct": 26.9,
+   "expected_pct": 37.1,
+   "vs_expected_pts": -10.2,
+   "status": "Recruit workers",
+   "workers_short": 46,
+   "late_post_pct": 5,
+   "approval_pct": 10,
+   "low_pay_pct": 28
   },
   {
    "market": "Queensport",
-   "posted_hrs_wk": 726,
-   "fill_pct": 23.9,
-   "expected_pct": 36.3,
-   "vs_expected_pts": -12.5,
+   "posted_hrs_wk": 7044,
+   "fill_pct": 26.7,
+   "expected_pct": 36.7,
+   "vs_expected_pts": -10.1,
    "status": "Recruit workers",
-   "workers_short": 6,
-   "late_post_pct": 12,
-   "approval_pct": 11,
+   "workers_short": 51,
+   "late_post_pct": 11,
+   "approval_pct": 10,
    "low_pay_pct": 26
   },
   {
    "market": "Pinecrest",
-   "posted_hrs_wk": 295,
-   "fill_pct": 25.1,
-   "expected_pct": 36.2,
-   "vs_expected_pts": -11.2,
+   "posted_hrs_wk": 2994,
+   "fill_pct": 25.6,
+   "expected_pct": 35.6,
+   "vs_expected_pts": -10.0,
    "status": "Recruit workers",
-   "workers_short": 2,
-   "late_post_pct": 17,
-   "approval_pct": 4,
-   "low_pay_pct": 31
+   "workers_short": 21,
+   "late_post_pct": 15,
+   "approval_pct": 5,
+   "low_pay_pct": 36
+  },
+  {
+   "market": "Bellhaven",
+   "posted_hrs_wk": 4172,
+   "fill_pct": 24.9,
+   "expected_pct": 34.2,
+   "vs_expected_pts": -9.3,
+   "status": "Recruit workers",
+   "workers_short": 28,
+   "late_post_pct": 31,
+   "approval_pct": 5,
+   "low_pay_pct": 32
   },
   {
    "market": "Fairhaven",
-   "posted_hrs_wk": 284,
-   "fill_pct": 26.6,
-   "expected_pct": 37.7,
-   "vs_expected_pts": -11.1,
-   "status": "Recruit workers",
-   "workers_short": 2,
-   "late_post_pct": 25,
-   "approval_pct": 6,
-   "low_pay_pct": 10
-  },
-  {
-   "market": "Thornbury",
-   "posted_hrs_wk": 1317,
-   "fill_pct": 18.0,
-   "expected_pct": 28.0,
-   "vs_expected_pts": -10.1,
-   "status": "Recruit workers",
-   "workers_short": 9,
-   "late_post_pct": 9,
-   "approval_pct": 62,
-   "low_pay_pct": 39
-  },
-  {
-   "market": "Eastport",
-   "posted_hrs_wk": 363,
-   "fill_pct": 25.7,
-   "expected_pct": 35.7,
-   "vs_expected_pts": -10.0,
-   "status": "Recruit workers",
-   "workers_short": 3,
-   "late_post_pct": 27,
-   "approval_pct": 7,
-   "low_pay_pct": 21
-  },
-  {
-   "market": "Lakemont",
-   "posted_hrs_wk": 558,
-   "fill_pct": 28.4,
-   "expected_pct": 35.9,
-   "vs_expected_pts": -7.5,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 33,
-   "approval_pct": 5,
-   "low_pay_pct": 19
-  },
-  {
-   "market": "Foxborough",
-   "posted_hrs_wk": 603,
-   "fill_pct": 30.2,
-   "expected_pct": 37.3,
-   "vs_expected_pts": -7.2,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 7,
-   "approval_pct": 8,
-   "low_pay_pct": 26
-  },
-  {
-   "market": "Northvale",
-   "posted_hrs_wk": 615,
-   "fill_pct": 31.3,
-   "expected_pct": 37.3,
-   "vs_expected_pts": -6.0,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 14,
-   "approval_pct": 7,
-   "low_pay_pct": 21
-  },
-  {
-   "market": "Ironton",
-   "posted_hrs_wk": 260,
-   "fill_pct": 27.4,
-   "expected_pct": 32.0,
-   "vs_expected_pts": -4.5,
-   "status": "Fix shifts",
-   "workers_short": 0,
-   "late_post_pct": 11,
-   "approval_pct": 58,
-   "low_pay_pct": 8
-  },
-  {
-   "market": "Brookmere",
-   "posted_hrs_wk": 594,
-   "fill_pct": 37.2,
-   "expected_pct": 40.1,
-   "vs_expected_pts": -3.0,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 8,
-   "approval_pct": 11,
-   "low_pay_pct": 0
-  },
-  {
-   "market": "Ashford",
-   "posted_hrs_wk": 1534,
-   "fill_pct": 36.6,
-   "expected_pct": 38.3,
-   "vs_expected_pts": -1.8,
+   "posted_hrs_wk": 2599,
+   "fill_pct": 30.5,
+   "expected_pct": 37.8,
+   "vs_expected_pts": -7.3,
    "status": "Healthy",
    "workers_short": 0,
    "late_post_pct": 26,
-   "approval_pct": 6,
-   "low_pay_pct": 5
+   "approval_pct": 5,
+   "low_pay_pct": 11
   },
   {
    "market": "Cedar Falls",
-   "posted_hrs_wk": 509,
-   "fill_pct": 39.3,
-   "expected_pct": 40.3,
-   "vs_expected_pts": -1.1,
+   "posted_hrs_wk": 5282,
+   "fill_pct": 33.6,
+   "expected_pct": 40.6,
+   "vs_expected_pts": -6.9,
    "status": "Healthy",
    "workers_short": 0,
    "late_post_pct": 2,
-   "approval_pct": 5,
-   "low_pay_pct": 13
-  },
-  {
-   "market": "Amberly",
-   "posted_hrs_wk": 977,
-   "fill_pct": 35.1,
-   "expected_pct": 35.0,
-   "vs_expected_pts": 0.1,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 33,
-   "approval_pct": 5,
-   "low_pay_pct": 24
-  },
-  {
-   "market": "Stonegate",
-   "posted_hrs_wk": 216,
-   "fill_pct": 38.6,
-   "expected_pct": 37.7,
-   "vs_expected_pts": 0.9,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 28,
    "approval_pct": 6,
-   "low_pay_pct": 6
+   "low_pay_pct": 11
   },
   {
-   "market": "Crestwood",
-   "posted_hrs_wk": 1106,
-   "fill_pct": 35.3,
-   "expected_pct": 34.5,
-   "vs_expected_pts": 0.9,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 35,
-   "approval_pct": 4,
-   "low_pay_pct": 27
-  },
-  {
-   "market": "Zephyr Hills",
-   "posted_hrs_wk": 233,
-   "fill_pct": 38.3,
-   "expected_pct": 37.2,
-   "vs_expected_pts": 1.1,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 22,
-   "approval_pct": 11,
-   "low_pay_pct": 9
-  },
-  {
-   "market": "Kingsbridge",
-   "posted_hrs_wk": 458,
-   "fill_pct": 39.7,
-   "expected_pct": 36.3,
-   "vs_expected_pts": 3.4,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 34,
-   "approval_pct": 4,
-   "low_pay_pct": 16
-  },
-  {
-   "market": "Yorkfield",
-   "posted_hrs_wk": 575,
-   "fill_pct": 42.7,
-   "expected_pct": 38.9,
-   "vs_expected_pts": 3.8,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 24,
-   "approval_pct": 6,
-   "low_pay_pct": 2
-  },
-  {
-   "market": "Millbrook",
-   "posted_hrs_wk": 980,
-   "fill_pct": 41.3,
-   "expected_pct": 37.3,
-   "vs_expected_pts": 4.0,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 11,
-   "approval_pct": 4,
-   "low_pay_pct": 27
-  },
-  {
-   "market": "Dunmore",
-   "posted_hrs_wk": 594,
-   "fill_pct": 39.8,
-   "expected_pct": 35.7,
-   "vs_expected_pts": 4.2,
+   "market": "Northvale",
+   "posted_hrs_wk": 6127,
+   "fill_pct": 31.4,
+   "expected_pct": 37.9,
+   "vs_expected_pts": -6.5,
    "status": "Healthy",
    "workers_short": 0,
    "late_post_pct": 13,
    "approval_pct": 5,
-   "low_pay_pct": 38
+   "low_pay_pct": 20
+  },
+  {
+   "market": "Lakemont",
+   "posted_hrs_wk": 5352,
+   "fill_pct": 31.2,
+   "expected_pct": 36.0,
+   "vs_expected_pts": -4.8,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 32,
+   "approval_pct": 5,
+   "low_pay_pct": 20
+  },
+  {
+   "market": "Brookmere",
+   "posted_hrs_wk": 6020,
+   "fill_pct": 36.2,
+   "expected_pct": 40.5,
+   "vs_expected_pts": -4.3,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 9,
+   "approval_pct": 10,
+   "low_pay_pct": 0
+  },
+  {
+   "market": "Ashford",
+   "posted_hrs_wk": 15806,
+   "fill_pct": 36.5,
+   "expected_pct": 38.4,
+   "vs_expected_pts": -2.0,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 26,
+   "approval_pct": 5,
+   "low_pay_pct": 6
+  },
+  {
+   "market": "Ironton",
+   "posted_hrs_wk": 2719,
+   "fill_pct": 30.0,
+   "expected_pct": 31.7,
+   "vs_expected_pts": -1.6,
+   "status": "Fix shifts",
+   "workers_short": 0,
+   "late_post_pct": 9,
+   "approval_pct": 61,
+   "low_pay_pct": 8
+  },
+  {
+   "market": "Crestwood",
+   "posted_hrs_wk": 10977,
+   "fill_pct": 34.4,
+   "expected_pct": 34.4,
+   "vs_expected_pts": -0.0,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 36,
+   "approval_pct": 5,
+   "low_pay_pct": 27
+  },
+  {
+   "market": "Zephyr Hills",
+   "posted_hrs_wk": 2650,
+   "fill_pct": 37.8,
+   "expected_pct": 37.6,
+   "vs_expected_pts": 0.2,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 21,
+   "approval_pct": 10,
+   "low_pay_pct": 11
+  },
+  {
+   "market": "Millbrook",
+   "posted_hrs_wk": 9788,
+   "fill_pct": 38.5,
+   "expected_pct": 37.6,
+   "vs_expected_pts": 0.9,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 10,
+   "approval_pct": 5,
+   "low_pay_pct": 25
+  },
+  {
+   "market": "Amberly",
+   "posted_hrs_wk": 9559,
+   "fill_pct": 35.9,
+   "expected_pct": 34.8,
+   "vs_expected_pts": 1.1,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 33,
+   "approval_pct": 5,
+   "low_pay_pct": 26
+  },
+  {
+   "market": "Stonegate",
+   "posted_hrs_wk": 2045,
+   "fill_pct": 40.4,
+   "expected_pct": 39.0,
+   "vs_expected_pts": 1.4,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 22,
+   "approval_pct": 5,
+   "low_pay_pct": 5
+  },
+  {
+   "market": "Kingsbridge",
+   "posted_hrs_wk": 4628,
+   "fill_pct": 38.4,
+   "expected_pct": 36.2,
+   "vs_expected_pts": 2.2,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 30,
+   "approval_pct": 5,
+   "low_pay_pct": 19
+  },
+  {
+   "market": "Yorkfield",
+   "posted_hrs_wk": 5988,
+   "fill_pct": 42.1,
+   "expected_pct": 39.1,
+   "vs_expected_pts": 3.0,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 23,
+   "approval_pct": 5,
+   "low_pay_pct": 4
+  },
+  {
+   "market": "Valemont",
+   "posted_hrs_wk": 4691,
+   "fill_pct": 43.5,
+   "expected_pct": 39.6,
+   "vs_expected_pts": 3.8,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 17,
+   "approval_pct": 5,
+   "low_pay_pct": 4
+  },
+  {
+   "market": "Oakridge",
+   "posted_hrs_wk": 4001,
+   "fill_pct": 39.0,
+   "expected_pct": 34.0,
+   "vs_expected_pts": 5.0,
+   "status": "Healthy",
+   "workers_short": 0,
+   "late_post_pct": 33,
+   "approval_pct": 10,
+   "low_pay_pct": 27
   },
   {
    "market": "Harbor City",
-   "posted_hrs_wk": 586,
-   "fill_pct": 40.8,
+   "posted_hrs_wk": 5847,
+   "fill_pct": 41.6,
    "expected_pct": 36.2,
-   "vs_expected_pts": 4.6,
+   "vs_expected_pts": 5.4,
    "status": "Healthy",
    "workers_short": 0,
    "late_post_pct": 19,
@@ -424,125 +436,113 @@
    "low_pay_pct": 22
   },
   {
-   "market": "Valemont",
-   "posted_hrs_wk": 470,
-   "fill_pct": 44.0,
-   "expected_pct": 39.0,
-   "vs_expected_pts": 5.0,
+   "market": "Dunmore",
+   "posted_hrs_wk": 5811,
+   "fill_pct": 43.2,
+   "expected_pct": 35.4,
+   "vs_expected_pts": 7.7,
    "status": "Healthy",
    "workers_short": 0,
-   "late_post_pct": 20,
-   "approval_pct": 8,
-   "low_pay_pct": 4
-  },
-  {
-   "market": "Riverton",
-   "posted_hrs_wk": 153,
-   "fill_pct": 40.3,
-   "expected_pct": 35.2,
-   "vs_expected_pts": 5.1,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 37,
+   "late_post_pct": 15,
    "approval_pct": 5,
-   "low_pay_pct": 20
-  },
-  {
-   "market": "Dovercourt",
-   "posted_hrs_wk": 1103,
-   "fill_pct": 44.5,
-   "expected_pct": 37.3,
-   "vs_expected_pts": 7.2,
-   "status": "Healthy",
-   "workers_short": 0,
-   "late_post_pct": 36,
-   "approval_pct": 6,
-   "low_pay_pct": 4
+   "low_pay_pct": 36
   },
   {
    "market": "Westfield",
-   "posted_hrs_wk": 816,
-   "fill_pct": 45.1,
+   "posted_hrs_wk": 7781,
+   "fill_pct": 46.1,
    "expected_pct": 37.5,
-   "vs_expected_pts": 7.6,
-   "status": "Healthy",
+   "vs_expected_pts": 8.5,
+   "status": "Spare capacity",
    "workers_short": 0,
    "late_post_pct": 4,
    "approval_pct": 5,
    "low_pay_pct": 30
   },
   {
-   "market": "Oakridge",
-   "posted_hrs_wk": 411,
-   "fill_pct": 42.5,
-   "expected_pct": 33.4,
-   "vs_expected_pts": 9.1,
+   "market": "Dovercourt",
+   "posted_hrs_wk": 11308,
+   "fill_pct": 46.4,
+   "expected_pct": 37.6,
+   "vs_expected_pts": 8.8,
    "status": "Spare capacity",
    "workers_short": 0,
-   "late_post_pct": 34,
-   "approval_pct": 12,
-   "low_pay_pct": 29
-  },
-  {
-   "market": "Glenwood",
-   "posted_hrs_wk": 2450,
-   "fill_pct": 45.2,
-   "expected_pct": 35.4,
-   "vs_expected_pts": 9.8,
-   "status": "Spare capacity",
-   "workers_short": 0,
-   "late_post_pct": 23,
+   "late_post_pct": 35,
    "approval_pct": 5,
-   "low_pay_pct": 30
+   "low_pay_pct": 5
   },
   {
-   "market": "Upton",
-   "posted_hrs_wk": 550,
-   "fill_pct": 50.6,
-   "expected_pct": 36.3,
-   "vs_expected_pts": 14.3,
+   "market": "Riverton",
+   "posted_hrs_wk": 1459,
+   "fill_pct": 44.5,
+   "expected_pct": 35.3,
+   "vs_expected_pts": 9.2,
    "status": "Spare capacity",
    "workers_short": 0,
-   "late_post_pct": 18,
-   "approval_pct": 10,
+   "late_post_pct": 33,
+   "approval_pct": 6,
    "low_pay_pct": 23
   },
   {
+   "market": "Glenwood",
+   "posted_hrs_wk": 24648,
+   "fill_pct": 45.0,
+   "expected_pct": 35.4,
+   "vs_expected_pts": 9.6,
+   "status": "Spare capacity",
+   "workers_short": 0,
+   "late_post_pct": 22,
+   "approval_pct": 5,
+   "low_pay_pct": 31
+  },
+  {
+   "market": "Upton",
+   "posted_hrs_wk": 5452,
+   "fill_pct": 51.6,
+   "expected_pct": 36.8,
+   "vs_expected_pts": 14.8,
+   "status": "Spare capacity",
+   "workers_short": 0,
+   "late_post_pct": 19,
+   "approval_pct": 10,
+   "low_pay_pct": 19
+  },
+  {
    "market": "Elmhurst",
-   "posted_hrs_wk": 606,
-   "fill_pct": 55.4,
-   "expected_pct": 36.5,
-   "vs_expected_pts": 18.9,
+   "posted_hrs_wk": 6189,
+   "fill_pct": 54.2,
+   "expected_pct": 36.2,
+   "vs_expected_pts": 17.9,
    "status": "Spare capacity",
    "workers_short": 0,
    "late_post_pct": 26,
    "approval_pct": 10,
-   "low_pay_pct": 14
+   "low_pay_pct": 16
   }
  ],
  "flow": {
-  "open": 5305,
-  "deleted_late": 2465,
-  "deleted_early": 1305,
-  "applied_not_booked": 781,
-  "slot_removed": 1172,
-  "called_out": 1533,
-  "cancelled": 760,
-  "no_show": 116,
-  "posted": 21578,
-  "worked": 7772,
-  "short": 369
+  "open": 53364,
+  "deleted_late": 24161,
+  "deleted_early": 12927,
+  "applied_not_booked": 7648,
+  "slot_removed": 11657,
+  "called_out": 15688,
+  "cancelled": 7208,
+  "no_show": 1237,
+  "posted": 215553,
+  "worked": 77905,
+  "short": 3758
  },
  "model": {
   "fitted_coefficients": {
-   "pay_low": -0.62,
-   "pay_high": 0.09,
-   "late_post": -0.55,
-   "weekend": -0.14,
-   "night": -0.05,
-   "approval": -0.69,
-   "multi_slot": 0.17,
-   "license_rn": -0.2
+   "pay_low": -0.64,
+   "pay_high": 0.1,
+   "late_post": -0.54,
+   "weekend": -0.18,
+   "night": -0.06,
+   "approval": -0.71,
+   "multi_slot": 0.13,
+   "license_rn": -0.28
   },
   "true_coefficients": {
    "pay_low": -0.9,
