@@ -2,7 +2,7 @@
 
 **Owner:** Joseph Fan, Product · **Status:** Internal tool live; port to internal tools platform in review · **Audience:** Leadership, Recruiting & Marketing, Client Success, Nurse Operations, Sales
 
-All examples use the synthetic demo. No company figures appear in this document.
+No company figures appear in this document.
 
 ## 1. Problem
 

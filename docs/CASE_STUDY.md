@@ -1,6 +1,6 @@
 # Case study: from "where do we buy ads?" to "why is this hour unfilled?"
 
-This is the long version of the [README](../README.md): how the Market Map changed as I learned what was actually going wrong, and why each design decision landed where it did. Every figure in the [demo](https://josephfanpm.github.io/Marketplace-Demand-Supply/) is synthetic; this document describes findings only in general terms.
+This is the long version of the [README](../README.md): how the Market Map changed as I learned what was actually going wrong, and why each design decision landed where it did. Every figure in the [demo](https://josephfanpm.github.io/Marketplace-Demand-Supply/) is scrambled; this document describes findings only in general terms.
 
 ## Contents
 
